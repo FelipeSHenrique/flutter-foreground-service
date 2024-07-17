@@ -7,14 +7,14 @@ Future<void> initializeService() async {
   final service = FlutterBackgroundService();
   await service.configure(
     iosConfiguration: IosConfiguration(
-      autoStart: false,
+      autoStart: true,
       onForeground: onStart,
       onBackground: onIosBackground,
     ),
     androidConfiguration: AndroidConfiguration(
       onStart: onStart,
       isForegroundMode: true,
-      autoStart: false
+      autoStart: true
     ),
   );
 }
@@ -45,9 +45,10 @@ void onStart(ServiceInstance service) {
           title: "FOREGROUND TEST",
           content: "This is test about foreground",
         );
+        print("foreground service running");
       }
+      print("background service running");
     }
-    print("background service running");
     service.invoke("update");
   });
 }
